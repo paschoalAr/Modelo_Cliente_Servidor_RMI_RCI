@@ -12,7 +12,6 @@ class Conta {
         this.saldo = saldo;
     }
 
-
 }
 
 public class Contas extends UnicastRemoteObject implements ContasInterface {
@@ -30,8 +29,8 @@ public class Contas extends UnicastRemoteObject implements ContasInterface {
 
     @Override
     public Conta[] getContas() throws RemoteException {
-        for (Conta c : contas) {
-            System.out.println(c.id + " " + c.nome + " " + c.saldo);
+        for(int i=0; i<contas.length; i++){
+            System.out.println("ID: " + contas[i].id + " Nome: " + contas[i].nome + " Saldo: " + contas[i].saldo);
         }
         //Mudar Depois
         Conta[] x = new Conta[contas.length];

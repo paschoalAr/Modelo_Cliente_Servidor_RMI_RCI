@@ -2,7 +2,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 
-public interface ContasInterface {
+public interface ContasInterface extends Remote{
     public Conta[] getContas() throws RemoteException;
     
     
