@@ -8,8 +8,8 @@ public interface ContasInterface extends Remote{
 
     // funções de uso dos dois clietes (CaixaAutoCliente e AgenciaCliente)
     public double saldo(int id) throws RemoteException;
-    public void deposito(int id, double valor) throws RemoteException;
-    public void saque(int id, double valor) throws RemoteException;
+    public boolean deposito(int id, double valor) throws RemoteException;
+    public boolean saque(int id, double valor) throws RemoteException;
 
     // funções de uso do cliente AgenciaCliente
     public void criaConta(String nome, double saldo) throws RemoteException;

@@ -36,7 +36,7 @@ public class CaixaAutoCliente {
         System.out.println("1 - Saldo");
         System.out.println("2 - Saque");
         System.out.println("3 - Depósito");
-        System.out.println("5 - Sair");
+        System.out.println("4 - Sair");
         System.out.println("Digite a opção desejada: ");
 
         int opcao = Integer.parseInt(System.console().readLine());
@@ -59,7 +59,12 @@ public class CaixaAutoCliente {
                     ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
                     System.out.println("Digite o valor do saque: ");
                     double valor = Double.parseDouble(System.console().readLine());
-                    contas.saque(id, valor);
+                    boolean retorno = contas.saque(id, valor);
+                    if (retorno) {
+                        System.out.println("Saque realizado");
+                    } else {
+                        System.out.println("Saque não realizado");
+                    }
                     break;
                 } catch (Exception e) {
                     System.out.println("Erro: " + e.getMessage());
@@ -69,12 +74,17 @@ public class CaixaAutoCliente {
                     ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
                     System.out.println("Digite o valor do depósito: ");
                     double valor = Double.parseDouble(System.console().readLine());
-                    contas.deposito(id, valor);
+                    boolean retorno = contas.deposito(id, valor);
+                    if (retorno) {
+                        System.out.println("Depósito realizado");
+                    } else {
+                        System.out.println("Depósito não realizado");
+                    }
                     break;
                 } catch (Exception e) {
                     System.out.println("Erro: " + e.getMessage());
                 }
-            case 5:
+            case 4:
                 System.out.println("Sair");
                 return false;
             default:

@@ -21,15 +21,23 @@ public class Contas extends UnicastRemoteObject implements ContasInterface {
     }
 
     @Override
-    public void deposito(int id, double valor) throws RemoteException {
+    public boolean deposito(int id, double valor) throws RemoteException {
         Conta conta = contas.get(id - 1);
+        if (valor < 0) {
+            return false;
+        }
         conta.saldo += valor;
+        return true;
     }
 
     @Override
-    public void saque(int id, double valor) throws RemoteException {
+    public boolean saque(int id, double valor) throws RemoteException {
         Conta conta = contas.get(id - 1);
+        if (valor < 0 || conta.saldo < valor) {
+            return false;
+        }
         conta.saldo -= valor;
+        return true;
     }
 
     @Override
