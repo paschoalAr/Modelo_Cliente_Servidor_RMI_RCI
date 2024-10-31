@@ -12,7 +12,6 @@ public class AgenciaCliente {
         }
     }
 
-
     public static int menu(){
         System.out.println("Agência - Menu");
         System.out.println("===================================");
@@ -55,6 +54,24 @@ public class AgenciaCliente {
                 } catch (Exception e) {
                     System.out.println("Erro: " + e.getMessage());
                 }
+            case 2:
+                try{
+                    ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
+                    System.out.println("Digite o ID da conta: ");
+                    int id = Integer.parseInt(System.console().readLine());
+                    if (id > contas.quantidadeContas() || id < 0) {
+                        System.out.println("ID inválido");
+                        break;
+                    }
+                    if (contas.removeConta(id)){
+                        System.out.println("Conta removida com sucesso");
+                    } else {
+                        System.out.println("Erro ao remover conta");
+                    }
+
+                } catch (Exception e) {
+                    System.out.println("Erro: " + e.getMessage());
+                } 
         }
         return true;
     }

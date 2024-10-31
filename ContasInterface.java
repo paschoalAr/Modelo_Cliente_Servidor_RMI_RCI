@@ -13,7 +13,7 @@ public interface ContasInterface extends Remote{
     public boolean saque(int id, double valor) throws RemoteException;
 
     // funções de uso do cliente AgenciaCliente
-    public void criaConta(String nome, double saldo) throws RemoteException;
-    public void removeConta(int id) throws RemoteException;
+    public boolean criaConta(String nome, double saldo) throws RemoteException;
+    public boolean removeConta(int id) throws RemoteException;
     public ArrayList<Conta> listaContas() throws RemoteException;
 }
