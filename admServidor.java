@@ -1,4 +1,5 @@
-import java.rmi.*;
+import java.rmi.Naming;
+import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 
@@ -11,7 +12,12 @@ public class admServidor extends UnicastRemoteObject{
 
     public static void main(String[] args) {
         try{
-            System.setProperty("java.rmi.server.hostname", "172.20.10.2");
+            try{
+                System.setProperty("java.rmi.server.hostname", java.net.InetAddress.getLocalHost().getHostAddress());
+
+            } catch (Exception e) {
+                System.out.println("Erro ao pegar o IP da máquina");
+            }
             java.rmi.registry.LocateRegistry.createRegistry(1099);
             System.out.println("RMI registry ready.");
         } catch (RemoteException e) {
@@ -20,10 +26,11 @@ public class admServidor extends UnicastRemoteObject{
         try {
             Naming.rebind("Contas", new Contas());
             System.out.println("admServer is ready.");
+            System.err.println("IP da máquina: " + java.net.InetAddress.getLocalHost().getHostAddress());
         } catch (Exception e) {
             System.out.println("admServer failed: ");
             e.printStackTrace();
         }
     }
 
-}
+}   
