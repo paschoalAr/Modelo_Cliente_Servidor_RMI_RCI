@@ -3,7 +3,7 @@ import java.util.ArrayList;;
 
 public class AgenciaCliente {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         while (true) {
             int opcao = menu();
             if (!escolha(opcao)) {
@@ -12,7 +12,7 @@ public class AgenciaCliente {
         }
     }
 
-    public static int menu(){
+    public static int menu() {
         System.out.println("Agência - Menu");
         System.out.println("===================================");
         System.out.println("Contas existentes: ");
@@ -40,8 +40,8 @@ public class AgenciaCliente {
         return opcao;
     }
 
-    public static boolean escolha(int opcao){
-        switch (opcao){
+    public static boolean escolha(int opcao) {
+        switch (opcao) {
             case 1:
                 try {
                     ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
@@ -54,8 +54,9 @@ public class AgenciaCliente {
                 } catch (Exception e) {
                     System.out.println("Erro: " + e.getMessage());
                 }
+                break;
             case 2:
-                try{
+                try {
                     ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
                     System.out.println("Digite o ID da conta: ");
                     int id = Integer.parseInt(System.console().readLine());
@@ -63,7 +64,7 @@ public class AgenciaCliente {
                         System.out.println("ID inválido");
                         break;
                     }
-                    if (contas.removeConta(id)){
+                    if (contas.removeConta(id)) {
                         System.out.println("Conta removida com sucesso");
                     } else {
                         System.out.println("Erro ao remover conta");
@@ -71,7 +72,60 @@ public class AgenciaCliente {
 
                 } catch (Exception e) {
                     System.out.println("Erro: " + e.getMessage());
-                } 
+                }
+                break;
+            case 3:
+                try {
+                    ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
+                    System.out.println("Digite o ID da conta: ");
+                    int id = Integer.parseInt(System.console().readLine());
+                    System.out.println("Saldo: " + contas.saldo(id));
+                } catch (Exception e) {
+                    System.out.println("Erro: " + e.getMessage());
+                }
+                break;
+            case 4:
+                try {
+                    ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
+                    System.out.println("Digite o ID da conta: ");
+                    int id = Integer.parseInt(System.console().readLine());
+                    System.out.println("Digite o valor do saque: ");
+                    double valor = Double.parseDouble(System.console().readLine());
+                    boolean retorno = contas.saque(id, valor);
+                    if (retorno) {
+                        System.out.println("Saque realizado");
+                    } else {
+                        System.out.println("Saque não realizado");
+                    }
+                    break;
+                } catch (Exception e) {
+                    System.out.println("Erro: " + e.getMessage());
+                }
+                break;
+            case 5:
+                try {
+                    ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
+                    System.out.println("Digite o ID da conta: ");
+                    int id = Integer.parseInt(System.console().readLine());
+                    System.out.println("Digite o valor do depósito: ");
+                    double valor = Double.parseDouble(System.console().readLine());
+                    boolean retorno = contas.deposito(id, valor);
+                    if (retorno) {
+                        System.out.println("Depósito realizado");
+                    } else {
+                        System.out.println("Depósito não realizado");
+                    }
+                    break;
+                } catch (Exception e) {
+                    System.out.println("Erro: " + e.getMessage());
+                }
+                break;
+            case 6:
+                System.out.println("Sair");
+                return false;
+            default:
+                System.out.println("Opção inválida");
+                break;
         }
         return true;
     }

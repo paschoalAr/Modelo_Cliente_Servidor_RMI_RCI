@@ -11,7 +11,7 @@ public class Contas extends UnicastRemoteObject implements ContasInterface {
         this.contas.add(new Conta(1, "Arthur Paschoal", 1000.0));
         this.contas.add(new Conta(2, "João Carvalho", 2000.0));
         this.contas.add(new Conta(3, "Rafa Roth", 1005.00));
-        this.contas.add(new Conta(4, "Japones do Sexo", 1000.0));
+        this.contas.add(new Conta(4, "Fernando Suzuki", 1000.0));
     }
 
     @Override
