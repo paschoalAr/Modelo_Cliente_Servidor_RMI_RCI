@@ -10,26 +10,24 @@ public class CaixaAutoCliente {
 
         int id = Integer.parseInt(args[0]);
 
+        try {
+            ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
+            int quantidadeContas = contas.quantidadeContas();
+
+            if (id > quantidadeContas) {
+                System.out.println("Conta não encontrada");
+                return;
+            }
+        } catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
+
         while (true) {
             int opcao = menu();
             if (!escolha(opcao, id)) {
                 break;
             }
         }
-
-        // System.out.println("Caixa Automático");
-        // while (true) {
-        // System.out.println("Qual o id da sua conta");
-
-        // // System.out.println("1 - Saldo");
-        // // System.out.println("2 - Saque");
-        // // System.out.println("3 - Depósito");
-        // // System.out.println("4 - Transferência");
-        // // System.out.println("5 - Sair");
-        // // System.out.println("Digite a opção desejada: ");
-
-        // int opcao = Integer.parseInt(System.console().readLine());
-
     }
 
     public static int menu() {
@@ -66,7 +64,7 @@ public class CaixaAutoCliente {
                 } catch (Exception e) {
                     System.out.println("Erro: " + e.getMessage());
                 }
-                case 3:
+            case 3:
                 try {
                     ContasInterface contas = (ContasInterface) Naming.lookup("rmi://" + serverIP + "/Contas");
                     System.out.println("Digite o valor do depósito: ");
