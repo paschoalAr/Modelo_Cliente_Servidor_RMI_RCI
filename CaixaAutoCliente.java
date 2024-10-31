@@ -44,11 +44,11 @@ public class CaixaAutoCliente {
     }
 
     public static boolean escolha(int opcao, int id) {
-        String serverIP = "172.20.10.2";
+        String serverIP = "25.21.54.189";
         switch (opcao) {
             case 1:
                 try {
-                    ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
+                    ContasInterface contas = (ContasInterface) Naming.lookup("rmi://" + serverIP + "/Contas");
                     System.out.println("Saldo: " + contas.saldo(id));
                 } catch (Exception e) {
                     System.out.println("Erro: " + e.getMessage());
@@ -76,7 +76,7 @@ public class CaixaAutoCliente {
                 }
             case 5:
                 System.out.println("Sair");
-                return false; // Sai do método main, encerrando o programa
+                return false;
             default:
                 System.out.println("Opção inválida");
                 break;
@@ -85,5 +85,3 @@ public class CaixaAutoCliente {
         return true;
     }
 }
-
-//
