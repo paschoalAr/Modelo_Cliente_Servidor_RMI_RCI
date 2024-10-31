@@ -11,16 +11,14 @@ public class admServidor extends UnicastRemoteObject{
 
     public static void main(String[] args) {
         try{
+            System.setProperty("java.rmi.server.hostname", "172.20.10.2");
             java.rmi.registry.LocateRegistry.createRegistry(1099);
             System.out.println("RMI registry ready.");
         } catch (RemoteException e) {
             System.out.println("RMI registry already running.");
         }
         try {
-            // String serverIP = "179.68.6.31";
-            // Naming.rebind("rmi://"+serverIP+"/Contas", new Contas());
             Naming.rebind("Contas", new Contas());
-            // Naming.rebind("Contas", new Contas());
             System.out.println("admServer is ready.");
         } catch (Exception e) {
             System.out.println("admServer failed: ");
