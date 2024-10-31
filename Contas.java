@@ -42,7 +42,7 @@ public class Contas extends UnicastRemoteObject implements ContasInterface {
 
     @Override
     public void criaConta(String nome, double saldo) throws RemoteException {
-        Conta novaConta = new Conta(contas.size(), nome, saldo);
+        Conta novaConta = new Conta(contas.size()+1, nome, saldo);
         contas.add(novaConta);
     }
 
@@ -57,7 +57,7 @@ public class Contas extends UnicastRemoteObject implements ContasInterface {
     }
 
     @Override
-    public ArrayList listaContas() throws RemoteException {
+    public ArrayList<Conta> listaContas() throws RemoteException {
         return contas;
     }
 

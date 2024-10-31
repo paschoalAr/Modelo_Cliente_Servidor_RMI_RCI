@@ -32,7 +32,8 @@ public class CaixaAutoCliente {
     }
 
     public static int menu() {
-        System.err.println("===================================");
+        System.out.println("Caixa Automático - Menu");
+        System.out.println("===================================");
         System.out.println("1 - Saldo");
         System.out.println("2 - Saque");
         System.out.println("3 - Depósito");
