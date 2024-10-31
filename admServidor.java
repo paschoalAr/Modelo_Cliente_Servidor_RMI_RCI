@@ -17,7 +17,10 @@ public class admServidor extends UnicastRemoteObject{
             System.out.println("RMI registry already running.");
         }
         try {
+            // String serverIP = "179.68.6.31";
+            // Naming.rebind("rmi://"+serverIP+"/Contas", new Contas());
             Naming.rebind("Contas", new Contas());
+            // Naming.rebind("Contas", new Contas());
             System.out.println("admServer is ready.");
         } catch (Exception e) {
             System.out.println("admServer failed: ");

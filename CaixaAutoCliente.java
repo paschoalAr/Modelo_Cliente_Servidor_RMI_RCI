@@ -51,6 +51,8 @@ public class CaixaAutoCliente {
         switch (opcao) {
             case 1:
                 try {
+                    // String serverIP = "179.68.6.31";
+                    // ContasInterface contas = (ContasInterface) Naming.lookup("rmi://"+ serverIP +"/Contas");
                     ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
                     System.out.println("Saldo: " + contas.saldo(id));
                 } catch (Exception e) {
