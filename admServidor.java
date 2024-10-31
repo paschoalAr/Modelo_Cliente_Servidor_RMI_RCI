@@ -21,7 +21,8 @@ public class admServidor extends UnicastRemoteObject{
             java.rmi.registry.LocateRegistry.createRegistry(1099);
             System.out.println("RMI registry ready.");
         } catch (RemoteException e) {
-            System.out.println("RMI registry already running.");
+            System.out.println("Failed to connect to RMI registry at the specified IP.");
+            e.printStackTrace();
         }
         try {
             Naming.rebind("Contas", new Contas());

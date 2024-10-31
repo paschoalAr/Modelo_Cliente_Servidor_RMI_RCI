@@ -9,15 +9,13 @@ public class CaixaAutoCliente {
         }
 
         int id = Integer.parseInt(args[0]);
-        
+
         while (true) {
             int opcao = menu();
-            if (!escolha(opcao, id)){
+            if (!escolha(opcao, id)) {
                 break;
             }
         }
-
-      
 
         // System.out.println("Caixa Automático");
         // while (true) {
@@ -41,13 +39,14 @@ public class CaixaAutoCliente {
         System.out.println("3 - Depósito");
         System.out.println("5 - Sair");
         System.out.println("Digite a opção desejada: ");
-        
+
         int opcao = Integer.parseInt(System.console().readLine());
 
         return opcao;
     }
 
     public static boolean escolha(int opcao, int id) {
+        String serverIP = "172.20.10.2";
         switch (opcao) {
             case 1:
                 try {
@@ -58,8 +57,8 @@ public class CaixaAutoCliente {
                 }
                 break;
             case 2:
-                try{
-                    ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
+                try {
+                    ContasInterface contas = (ContasInterface) Naming.lookup("rmi://" + serverIP + "/Contas");
                     System.out.println("Digite o valor do saque: ");
                     double valor = Double.parseDouble(System.console().readLine());
                     contas.saque(id, valor);
@@ -67,9 +66,9 @@ public class CaixaAutoCliente {
                 } catch (Exception e) {
                     System.out.println("Erro: " + e.getMessage());
                 }
-            case 3:
+                case 3:
                 try {
-                    ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
+                    ContasInterface contas = (ContasInterface) Naming.lookup("rmi://" + serverIP + "/Contas");
                     System.out.println("Digite o valor do depósito: ");
                     double valor = Double.parseDouble(System.console().readLine());
                     contas.deposito(id, valor);
@@ -88,3 +87,5 @@ public class CaixaAutoCliente {
         return true;
     }
 }
+
+//
