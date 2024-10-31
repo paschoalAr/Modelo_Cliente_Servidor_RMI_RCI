@@ -10,11 +10,13 @@ public class admServidor extends UnicastRemoteObject{
     }
 
     public static void main(String[] args) {
-        try{
-            java.rmi.registry.LocateRegistry.createRegistry(1099);
-            System.out.println("RMI registry ready.");
+        try {
+            String ip = "179.68.6.31"; // Replace with the desired IP address
+            java.rmi.registry.LocateRegistry.getRegistry(ip, 1099);
+            System.out.println("Connected to RMI registry at " + ip);
         } catch (RemoteException e) {
-            System.out.println("RMI registry already running.");
+            System.out.println("Failed to connect to RMI registry at the specified IP.");
+            e.printStackTrace();
         }
         try {
             // String serverIP = "179.68.6.31";
