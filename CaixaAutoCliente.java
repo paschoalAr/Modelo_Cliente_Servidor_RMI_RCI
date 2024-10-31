@@ -39,7 +39,6 @@ public class CaixaAutoCliente {
         System.out.println("1 - Saldo");
         System.out.println("2 - Saque");
         System.out.println("3 - Depósito");
-        System.out.println("4 - Transferência");
         System.out.println("5 - Sair");
         System.out.println("Digite a opção desejada: ");
         
@@ -53,29 +52,31 @@ public class CaixaAutoCliente {
             case 1:
                 try {
                     ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
-                    Conta[] listaContas = contas.getContas();
-                    for (Conta c : listaContas) {
-                        if (c.id == id) {
-                            System.out.println("Conta encontrada: " + c.nome + " - " + c.saldo);
-                            return true;
-                        }
-                    }
-                    System.out.println("Conta não encontrada");
-                    break;
+                    System.out.println("Saldo: " + contas.saldo(id));
                 } catch (Exception e) {
-                    System.out.println("CaixaAutoCliente failed: ");
-                    e.printStackTrace();
+                    System.out.println("Erro: " + e.getMessage());
                 }
                 break;
             case 2:
-                System.out.println("Saque");
-                break;
+                try{
+                    ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
+                    System.out.println("Digite o valor do saque: ");
+                    double valor = Double.parseDouble(System.console().readLine());
+                    contas.saque(id, valor);
+                    break;
+                } catch (Exception e) {
+                    System.out.println("Erro: " + e.getMessage());
+                }
             case 3:
-                System.out.println("Depósito");
-                break;
-            case 4:
-                System.out.println("Transferência");
-                break;
+                try {
+                    ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
+                    System.out.println("Digite o valor do depósito: ");
+                    double valor = Double.parseDouble(System.console().readLine());
+                    contas.deposito(id, valor);
+                    break;
+                } catch (Exception e) {
+                    System.out.println("Erro: " + e.getMessage());
+                }
             case 5:
                 System.out.println("Sair");
                 return false; // Sai do método main, encerrando o programa

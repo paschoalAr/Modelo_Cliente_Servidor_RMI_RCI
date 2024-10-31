@@ -15,7 +15,31 @@ public class Contas extends UnicastRemoteObject implements ContasInterface {
     }
 
     @Override
-    public Conta[] getContas() throws RemoteException {
-        return contas;
+    public double saldo(int id) throws RemoteException {
+        for (Conta c : contas) {
+            if (c.id == id) {
+                return c.saldo;
+            }
+        }
+        return -1;
     }
+
+    @Override
+    public void deposito(int id, double valor) throws RemoteException {
+        for (Conta c : contas) {
+            if (c.id == id) {
+                c.saldo += valor;
+            }
+        }
+    }
+
+    @Override
+    public void saque(int id, double valor) throws RemoteException {
+        for (Conta c : contas) {
+            if (c.id == id) {
+                c.saldo -= valor;
+            }
+        }
+    }
+
 }
