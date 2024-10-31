@@ -56,5 +56,10 @@ public class Contas extends UnicastRemoteObject implements ContasInterface {
         return contas.size();
     }
 
+    @Override
+    public ArrayList listaContas() throws RemoteException {
+        return contas;
+    }
+
 
 }
