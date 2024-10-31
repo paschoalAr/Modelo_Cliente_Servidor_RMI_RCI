@@ -2,9 +2,9 @@ import java.rmi.*;
 import java.rmi.server.UnicastRemoteObject;
 
 
-public class admServidor extends UnicastRemoteObject{
+public class AdmServidor extends UnicastRemoteObject{
 
-    protected admServidor() throws RemoteException {
+    protected AdmServidor() throws RemoteException {
         super();
     }
 
