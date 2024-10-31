@@ -9,28 +9,25 @@ public class CaixaAutoCliente {
         }
 
         int id = Integer.parseInt(args[0]);
-        
+
+        try {
+            ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
+            int quantidadeContas = contas.quantidadeContas();
+
+            if (id > quantidadeContas) {
+                System.out.println("Conta não encontrada");
+                return;
+            }
+        } catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
+
         while (true) {
             int opcao = menu();
-            if (!escolha(opcao, id)){
+            if (!escolha(opcao, id)) {
                 break;
             }
         }
-
-      
-
-        // System.out.println("Caixa Automático");
-        // while (true) {
-        // System.out.println("Qual o id da sua conta");
-
-        // // System.out.println("1 - Saldo");
-        // // System.out.println("2 - Saque");
-        // // System.out.println("3 - Depósito");
-        // // System.out.println("4 - Transferência");
-        // // System.out.println("5 - Sair");
-        // // System.out.println("Digite a opção desejada: ");
-
-        // int opcao = Integer.parseInt(System.console().readLine());
 
     }
 
@@ -41,7 +38,7 @@ public class CaixaAutoCliente {
         System.out.println("3 - Depósito");
         System.out.println("5 - Sair");
         System.out.println("Digite a opção desejada: ");
-        
+
         int opcao = Integer.parseInt(System.console().readLine());
 
         return opcao;
@@ -51,8 +48,6 @@ public class CaixaAutoCliente {
         switch (opcao) {
             case 1:
                 try {
-                    // String serverIP = "179.68.6.31";
-                    // ContasInterface contas = (ContasInterface) Naming.lookup("rmi://"+ serverIP +"/Contas");
                     ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
                     System.out.println("Saldo: " + contas.saldo(id));
                 } catch (Exception e) {
@@ -60,7 +55,7 @@ public class CaixaAutoCliente {
                 }
                 break;
             case 2:
-                try{
+                try {
                     ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
                     System.out.println("Digite o valor do saque: ");
                     double valor = Double.parseDouble(System.console().readLine());
@@ -81,7 +76,7 @@ public class CaixaAutoCliente {
                 }
             case 5:
                 System.out.println("Sair");
-                return false; // Sai do método main, encerrando o programa
+                return false;
             default:
                 System.out.println("Opção inválida");
                 break;
