@@ -2,17 +2,16 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-
-public class AdmServidor extends UnicastRemoteObject{
+public class AdmServidor extends UnicastRemoteObject {
 
     protected AdmServidor() throws RemoteException {
         super();
-       
+
     }
 
     public static void main(String[] args) {
-        try{
-            try{
+        try {
+            try {
                 System.setProperty("java.rmi.server.hostname", java.net.InetAddress.getLocalHost().getHostAddress());
 
             } catch (Exception e) {
@@ -33,4 +32,4 @@ public class AdmServidor extends UnicastRemoteObject{
         }
     }
 
-}   
+}
