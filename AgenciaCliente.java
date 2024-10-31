@@ -35,9 +35,14 @@ public class AgenciaCliente {
         System.out.println("6 - Sair");
         System.out.println("Digite a opção desejada: ");
 
-        int opcao = Integer.parseInt(System.console().readLine());
+        try {
+            int opcao = Integer.parseInt(System.console().readLine());
+            return opcao;
+        } catch (Exception e) {
+            
+        }
 
-        return opcao;
+        return -1;
     }
 
     public static boolean escolha(int opcao) {
@@ -47,12 +52,16 @@ public class AgenciaCliente {
                     ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
                     System.out.println("Digite o nome do cliente: ");
                     String nome = System.console().readLine();
+                    if (nome.isEmpty() || nome.length() < 2) {
+                        System.out.println("Nome inválido");
+                        break;
+                    }
                     System.out.println("Digite o saldo inicial: ");
                     double saldo = Double.parseDouble(System.console().readLine());
                     contas.criaConta(nome, saldo);
                     System.out.println("Conta criado com sucesso");
                 } catch (Exception e) {
-                    System.out.println("Erro: " + e.getMessage());
+                    System.out.println("Conta não criada");
                 }
                 break;
             case 2:
