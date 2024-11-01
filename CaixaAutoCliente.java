@@ -1,4 +1,5 @@
 import java.rmi.Naming;
+import java.util.UUID;
 
 public class CaixaAutoCliente {
 
@@ -58,9 +59,13 @@ public class CaixaAutoCliente {
             case 2:
                 try {
                     ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
+
                     System.out.println("Digite o valor do saque: ");
                     double valor = Double.parseDouble(System.console().readLine());
-                    boolean retorno = contas.saque(id, valor);
+                    
+                    UUID requestId = UUID.randomUUID();
+                    boolean retorno = contas.saque(id, valor, requestId);
+
                     if (retorno) {
                         System.out.println("Saque realizado");
                     } else {
@@ -73,9 +78,14 @@ public class CaixaAutoCliente {
             case 3:
                 try {
                     ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
+                   
                     System.out.println("Digite o valor do depósito: ");
                     double valor = Double.parseDouble(System.console().readLine());
-                    boolean retorno = contas.deposito(id, valor);
+                   
+                    UUID requestId = UUID.randomUUID();
+                    
+                    boolean retorno = contas.deposito(id, valor, requestId);
+                    
                     if (retorno) {
                         System.out.println("Depósito realizado");
                     } else {
