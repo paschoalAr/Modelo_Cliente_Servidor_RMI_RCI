@@ -3,7 +3,19 @@ import java.util.UUID;
 
 public class CaixaAutoCliente {
 
-    public static void main(String[] args) {
+    public static String serverIP = "25.21.54.189";
+    public static ContasInterface contas;
+
+    static {
+        try {
+            contas = (ContasInterface) Naming.lookup("rmi://" + serverIP + "/Contas");
+        } catch (Exception e) {
+            System.out.println("Erro ao conectar com o servidor: " + e.getMessage());
+            contas = null;
+        }
+    }
+
+        public static void main(String[] args) {
         if (args.length != 1) {
             System.out.println("Uso: java CaixaAutoCliente <id>");
             return;
@@ -12,7 +24,6 @@ public class CaixaAutoCliente {
         int id = Integer.parseInt(args[0]);
 
         try {
-            ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
             int quantidadeContas = contas.quantidadeContas();
 
             if (id > quantidadeContas) {
@@ -50,7 +61,6 @@ public class CaixaAutoCliente {
         switch (opcao) {
             case 1:
                 try {
-                    ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
 
                     System.out.println("===================================");
                     System.out.println("Resultado:");
@@ -63,7 +73,6 @@ public class CaixaAutoCliente {
                 break;
             case 2:
                 try {
-                    ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
 
                     System.out.println("Digite o valor do saque: ");
                     double valor = Double.parseDouble(System.console().readLine());
@@ -85,7 +94,6 @@ public class CaixaAutoCliente {
                 }
             case 3:
                 try {
-                    ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
 
                     System.out.println("Digite o valor do depósito: ");
                     double valor = Double.parseDouble(System.console().readLine());
@@ -112,7 +120,7 @@ public class CaixaAutoCliente {
             default:
                 System.out.println("===================================");
                 System.out.println("Resultado:");
-                
+
                 System.out.println("Opção inválida");
                 break;
         }
