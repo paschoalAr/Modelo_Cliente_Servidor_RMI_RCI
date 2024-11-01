@@ -12,7 +12,7 @@ public class AdmServidor extends UnicastRemoteObject {
     public static void main(String[] args) {
         try {
             try {
-                System.setProperty("java.rmi.server.hostname", java.net.InetAddress.getLocalHost().getHostAddress());
+                System.setProperty("java.rmi.server.hostname", "25.48.224.176");
 
             } catch (Exception e) {
                 System.out.println("Erro ao pegar o IP da máquina");
@@ -23,7 +23,7 @@ public class AdmServidor extends UnicastRemoteObject {
             System.out.println("RMI registry already running.");
         }
         try {
-            Naming.rebind("Contas", new Contas());
+            Naming.rebind("//25.48.224.176/Contas", new Contas());
             System.out.println("admServer is ready.");
             System.err.println("IP da máquina: " + java.net.InetAddress.getLocalHost().getHostAddress());
         } catch (Exception e) {
