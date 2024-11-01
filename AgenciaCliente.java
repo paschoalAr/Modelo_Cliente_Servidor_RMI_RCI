@@ -2,8 +2,7 @@ import java.rmi.Naming;
 import java.util.ArrayList;;
 
 public class AgenciaCliente {
-
-    public static String serverIP = "25.48.224.176";
+    public static String serverIP = "25.21.54.189";
     public static ContasInterface contas;
 
     static {
