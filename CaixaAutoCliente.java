@@ -43,9 +43,6 @@ public class CaixaAutoCliente {
 
         int opcao = Integer.parseInt(System.console().readLine());
 
-        System.out.println("===================================");
-        System.out.println("Resultado:");
-
         return opcao;
     }
 
@@ -54,7 +51,12 @@ public class CaixaAutoCliente {
             case 1:
                 try {
                     ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
+
+                    System.out.println("===================================");
+                    System.out.println("Resultado:");
+
                     System.out.println("Saldo: " + contas.saldo(id));
+
                 } catch (Exception e) {
                     System.out.println("Erro: " + e.getMessage());
                 }
@@ -68,6 +70,9 @@ public class CaixaAutoCliente {
 
                     UUID requestId = UUID.randomUUID();
                     boolean retorno = contas.saque(id, valor, requestId);
+
+                    System.out.println("===================================");
+                    System.out.println("Resultado:");
 
                     if (retorno) {
                         System.out.println("Saque realizado");
@@ -89,6 +94,9 @@ public class CaixaAutoCliente {
 
                     boolean retorno = contas.deposito(id, valor, requestId);
 
+                    System.out.println("===================================");
+                    System.out.println("Resultado:");
+
                     if (retorno) {
                         System.out.println("Depósito realizado");
                     } else {
@@ -102,6 +110,9 @@ public class CaixaAutoCliente {
                 System.out.println("Saindo...");
                 return false;
             default:
+                System.out.println("===================================");
+                System.out.println("Resultado:");
+                
                 System.out.println("Opção inválida");
                 break;
         }
