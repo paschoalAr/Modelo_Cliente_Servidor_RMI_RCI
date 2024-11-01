@@ -1,5 +1,6 @@
 import java.rmi.Naming;
-import java.util.ArrayList;;
+import java.util.ArrayList;
+import java.util.UUID;;
 
 public class AgenciaCliente {
 
@@ -39,7 +40,7 @@ public class AgenciaCliente {
             int opcao = Integer.parseInt(System.console().readLine());
             return opcao;
         } catch (Exception e) {
-            
+
         }
 
         return -1;
@@ -50,6 +51,7 @@ public class AgenciaCliente {
             case 1:
                 try {
                     ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
+
                     System.out.println("Digite o nome do cliente: ");
                     String nome = System.console().readLine();
                     if (nome.isEmpty() || nome.length() < 2) {
@@ -58,11 +60,21 @@ public class AgenciaCliente {
                     }
                     System.out.println("Digite o saldo inicial: ");
                     double saldo = Double.parseDouble(System.console().readLine());
-                    contas.criaConta(nome, saldo);
-                    System.out.println("Conta criado com sucesso");
+
+                    UUID requestId = UUID.randomUUID();
+
+                    boolean resultado = contas.criaConta(nome, saldo, requestId);
+
+                    if (resultado) {
+                        System.out.println("Conta criada com sucesso");
+                    } else {
+                        System.out.println("A conta já foi criada anteriormente com este requestId");
+                    }
+
                 } catch (Exception e) {
                     System.out.println("Conta não criada");
                 }
+
                 break;
             case 2:
                 try {
@@ -96,16 +108,21 @@ public class AgenciaCliente {
             case 4:
                 try {
                     ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
+
                     System.out.println("Digite o ID da conta: ");
                     int id = Integer.parseInt(System.console().readLine());
                     System.out.println("Digite o valor do saque: ");
                     double valor = Double.parseDouble(System.console().readLine());
-                    boolean retorno = contas.saque(id, valor);
+
+                    UUID requestId = UUID.randomUUID();
+                    boolean retorno = contas.saque(id, valor, requestId);
+
                     if (retorno) {
                         System.out.println("Saque realizado");
                     } else {
                         System.out.println("Saque não realizado");
                     }
+
                     break;
                 } catch (Exception e) {
                     System.out.println("Erro: " + e.getMessage());
@@ -114,11 +131,15 @@ public class AgenciaCliente {
             case 5:
                 try {
                     ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
+
                     System.out.println("Digite o ID da conta: ");
                     int id = Integer.parseInt(System.console().readLine());
                     System.out.println("Digite o valor do depósito: ");
                     double valor = Double.parseDouble(System.console().readLine());
-                    boolean retorno = contas.deposito(id, valor);
+                    
+                    UUID requestId = UUID.randomUUID();
+                    boolean retorno = contas.deposito(id, valor, requestId);
+                    
                     if (retorno) {
                         System.out.println("Depósito realizado");
                     } else {
