@@ -27,7 +27,7 @@
         @Override
         public synchronized boolean deposito(int id, double valor, UUID requestId) throws RemoteException {
             if (requestsProcessadas.contains(requestId)) {
-                return true;
+                return false;
             }
 
             Conta conta = contas.get(id - 1);
@@ -42,7 +42,7 @@
         @Override
         public synchronized boolean saque(int id, double valor, UUID requestId) throws RemoteException {
             if (requestsProcessadas.contains(requestId)) {
-                return true;
+                return false;
             }   
 
             Conta conta = contas.get(id - 1);
@@ -57,7 +57,7 @@
         @Override
         public synchronized boolean criaConta(String nome, double saldo, UUID requestId) throws RemoteException {
             if (requestsProcessadas.contains(requestId)) {
-                return true;
+                return false;
             }
 
             Conta novaConta = new Conta(contas.size() + 1, nome, saldo);
