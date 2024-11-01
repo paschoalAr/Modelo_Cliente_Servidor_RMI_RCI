@@ -3,6 +3,18 @@ import java.util.ArrayList;;
 
 public class AgenciaCliente {
 
+    public static String serverIP = "25.48.224.176";
+    public static ContasInterface contas;
+
+    static {
+        try {
+            contas = (ContasInterface) Naming.lookup("rmi://" + serverIP + "/Contas");
+        } catch (Exception e) {
+            System.out.println("Erro ao conectar com o servidor: " + e.getMessage());
+            contas = null;
+        }
+    }
+
     public static void main(String[] args) {
         while (true) {
             int opcao = menu();
@@ -13,12 +25,10 @@ public class AgenciaCliente {
     }
 
     public static int menu() {
-        String serverIP = "25.21.54.189";
         System.out.println("Agência - Menu");
         System.out.println("===================================");
         System.out.println("Contas existentes: ");
         try {
-            ContasInterface contas = (ContasInterface) Naming.lookup("rmi://" + serverIP + "/Contas");
             ArrayList<Conta> listaContas = contas.listaContas();
             System.out.println("ID - Nome - Saldo");
             for (Conta conta : listaContas) {
@@ -42,11 +52,9 @@ public class AgenciaCliente {
     }
 
     public static boolean escolha(int opcao) {
-        String serverIP = "25.21.54.189";
         switch (opcao) {
             case 1:
                 try {
-                    ContasInterface contas = (ContasInterface) Naming.lookup("rmi://" + serverIP + "/Contas");
                     System.out.println("Digite o nome do cliente: ");
                     String nome = System.console().readLine();
                     System.out.println("Digite o saldo inicial: ");
@@ -59,7 +67,6 @@ public class AgenciaCliente {
                 break;
             case 2:
                 try {
-                    ContasInterface contas = (ContasInterface) Naming.lookup("rmi://" + serverIP + "/Contas");
                     System.out.println("Digite o ID da conta: ");
                     int id = Integer.parseInt(System.console().readLine());
                     if (id > contas.quantidadeContas() || id < 0) {
@@ -78,7 +85,6 @@ public class AgenciaCliente {
                 break;
             case 3:
                 try {
-                    ContasInterface contas = (ContasInterface) Naming.lookup("rmi://" + serverIP + "/Contas");
                     System.out.println("Digite o ID da conta: ");
                     int id = Integer.parseInt(System.console().readLine());
                     System.out.println("Saldo: " + contas.saldo(id));
@@ -88,7 +94,6 @@ public class AgenciaCliente {
                 break;
             case 4:
                 try {
-                    ContasInterface contas = (ContasInterface) Naming.lookup("rmi://" + serverIP + "/Contas");
                     System.out.println("Digite o ID da conta: ");
                     int id = Integer.parseInt(System.console().readLine());
                     System.out.println("Digite o valor do saque: ");
@@ -106,7 +111,6 @@ public class AgenciaCliente {
                 break;
             case 5:
                 try {
-                    ContasInterface contas = (ContasInterface) Naming.lookup("rmi://" + serverIP + "/Contas");
                     System.out.println("Digite o ID da conta: ");
                     int id = Integer.parseInt(System.console().readLine());
                     System.out.println("Digite o valor do depósito: ");
