@@ -14,8 +14,8 @@ public class AgenciaCliente {
     }
 
     public static int menu() {
-        System.out.println("Agência - Menu");
         System.out.println("===================================");
+        System.out.println("Agência - Menu");
         System.out.println("Contas existentes: ");
         try {
             ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
@@ -40,8 +40,11 @@ public class AgenciaCliente {
             int opcao = Integer.parseInt(System.console().readLine());
             return opcao;
         } catch (Exception e) {
-
+            
         }
+
+        System.out.println("===================================");
+        System.out.println("Resultado:");
 
         return -1;
     }
@@ -65,6 +68,9 @@ public class AgenciaCliente {
 
                     boolean resultado = contas.criaConta(nome, saldo, requestId);
 
+                    System.out.println("===================================");
+                    System.out.println("Resultado:");
+
                     if (resultado) {
                         System.out.println("Conta criada com sucesso");
                     } else {
@@ -85,6 +91,10 @@ public class AgenciaCliente {
                         System.out.println("ID inválido");
                         break;
                     }
+
+                    System.out.println("===================================");
+                    System.out.println("Resultado:");
+
                     if (contas.removeConta(id)) {
                         System.out.println("Conta removida com sucesso");
                     } else {
@@ -100,6 +110,10 @@ public class AgenciaCliente {
                     ContasInterface contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
                     System.out.println("Digite o ID da conta: ");
                     int id = Integer.parseInt(System.console().readLine());
+
+                    System.out.println("===================================");
+                    System.out.println("Resultado:");
+
                     System.out.println("Saldo: " + contas.saldo(id));
                 } catch (Exception e) {
                     System.out.println("Erro: " + e.getMessage());
@@ -116,6 +130,9 @@ public class AgenciaCliente {
 
                     UUID requestId = UUID.randomUUID();
                     boolean retorno = contas.saque(id, valor, requestId);
+
+                    System.out.println("===================================");
+                    System.out.println("Resultado:");
 
                     if (retorno) {
                         System.out.println("Saque realizado");
@@ -140,6 +157,9 @@ public class AgenciaCliente {
                     UUID requestId = UUID.randomUUID();
                     boolean retorno = contas.deposito(id, valor, requestId);
                     
+                    System.out.println("===================================");
+                    System.out.println("Resultado:");
+
                     if (retorno) {
                         System.out.println("Depósito realizado");
                     } else {
@@ -151,7 +171,7 @@ public class AgenciaCliente {
                 }
                 break;
             case 6:
-                System.out.println("Sair");
+                System.out.println("Saindo...");
                 return false;
             default:
                 System.out.println("Opção inválida");
