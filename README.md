@@ -1,4 +1,3 @@
-
 # Projeto Cliente em Java
 
 Este projeto consiste em uma aplicação cliente em Java que oferece diversas funcionalidades, incluindo execução de uma agência cliente, um caixa automático, um teste de concorrência e um teste de injeção de falhas. Cada funcionalidade pode ser executada usando o `Makefile`, que simplifica a compilação, execução e limpeza de arquivos temporários.
