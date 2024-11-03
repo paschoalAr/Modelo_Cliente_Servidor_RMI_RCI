@@ -87,14 +87,4 @@
         public ArrayList<Conta> listaContas() throws RemoteException {
             return contas;
         }
-
-        public synchronized String request(UUID requestID) throws RemoteException {
-            if (requestsProcessadas.contains(requestID)) {
-                return "Request já processada";
-            } else {
-                requestsProcessadas.add(requestID);
-                return "Request processada";
-            }
-        }
-
     }
