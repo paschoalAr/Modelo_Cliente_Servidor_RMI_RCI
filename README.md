@@ -16,6 +16,8 @@ Este projeto possui um `Makefile` com os seguintes alvos:
 - **run-server**: Compila e executa o servidor (`admServidor`).
 - **run-agencia**: Compila e executa o cliente da agência (`agenciaCliente`) e limpa os arquivos compilados após a execução.
 - **run-caixa**: Compila e executa o cliente do caixa automático (`caixaAutoCliente`), com um ID especificado pelo usuário, e limpa os arquivos compilados após a execução.
+- **run-concorrencia**: Executa o teste de concorrência (`TesteConcorrencia`).
+- **run-falhas**: Executa o teste de injeção de falhas (`injecaoFalhas`).
 - **clean**: Remove todos os arquivos `.class` e limpa o terminal.
 
 ## Como Usar
@@ -62,6 +64,22 @@ make run-caixa id=123
 
 Esse comando compilará e executará o cliente do caixa automático com o ID especificado e, em seguida, removerá os arquivos `.class` gerados.
 
+### Executar Teste de Concorrência
+
+Para executar o teste de concorrência (`TesteConcorrencia`), utilize:
+
+```bash
+make run-concorrencia
+```
+
+### Executar Teste de Injeção de Falhas
+
+Para executar o teste de injeção de falhas (`injecaoFalhas`), utilize:
+
+```bash
+make run-falhas
+```
+
 ### Limpar Arquivos Compilados
 
 Para remover todos os arquivos `.class` e limpar o terminal, execute:
@@ -74,3 +92,4 @@ make clean
 
 - O comando `make clean` é executado automaticamente após a execução dos alvos `run-agencia` e `run-caixa`, então não é necessário executá-lo manualmente após esses comandos.
 - Certifique-se de definir um valor para `id` ao executar `run-caixa`, caso contrário, o comando poderá falhar.
+- Antes de iniciar qualquer cliente, certifique-se de que o servidor (`admServidor`) está em execução.
