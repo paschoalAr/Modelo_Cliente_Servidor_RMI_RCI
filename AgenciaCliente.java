@@ -30,14 +30,15 @@ public class AgenciaCliente {
         System.out.println("Agência - Menu");
         System.out.println("Contas existentes: ");
         try {
-
             ArrayList<Conta> listaContas = contas.listaContas();
+
             System.out.println("ID - Nome - Saldo");
             for (Conta conta : listaContas) {
                 System.out.println(conta.id + " - " + conta.nome + " - " + conta.saldo);
             }
+
         } catch (Exception e) {
-            System.out.println("Erro: " + e.getMessage());
+            System.out.println("Erro ao listar contas, favor tente novamente.");
         }
         System.out.println("===================================");
         System.out.println("1 - Criar Conta");
@@ -52,7 +53,9 @@ public class AgenciaCliente {
             int opcao = Integer.parseInt(System.console().readLine());
             return opcao;
         } catch (Exception e) {
-
+            System.out.println("===================================");
+            System.out.println("Resultado:");
+            System.out.println("Erro ao ler a opção, favor tente novamente.");
         }
 
         System.out.println("===================================");
@@ -68,6 +71,8 @@ public class AgenciaCliente {
                     System.out.println("Digite o nome do cliente: ");
                     String nome = System.console().readLine();
                     if (nome.isEmpty() || nome.length() < 2) {
+                        System.out.println("===================================");
+                        System.out.println("Resultado:");
                         System.out.println("Nome inválido");
                         break;
                     }
@@ -88,7 +93,9 @@ public class AgenciaCliente {
                     }
 
                 } catch (Exception e) {
-                    System.out.println("Conta não criada");
+                    System.out.println("===================================");
+                    System.out.println("Resultado:");
+                    System.out.println("Erro ao criar conta, favor tente novamente.");
                 }
 
                 break;
@@ -112,7 +119,9 @@ public class AgenciaCliente {
                     }
 
                 } catch (Exception e) {
-                    System.out.println("Erro: " + e.getMessage());
+                    System.out.println("===================================");
+                    System.out.println("Resultado:");
+                    System.out.println("Erro ao remover conta, favor tente novamente.");
                 }
                 break;
             case 3:
@@ -126,12 +135,13 @@ public class AgenciaCliente {
 
                     System.out.println("Saldo: " + contas.saldo(id));
                 } catch (Exception e) {
-                    System.out.println("Erro: " + e.getMessage());
+                    System.out.println("===================================");
+                    System.out.println("Resultado:");
+                    System.out.println("Erro ao consultar saldo, favor tente novamente.");
                 }
                 break;
             case 4:
                 try {
-
                     System.out.println("Digite o ID da conta: ");
                     int id = Integer.parseInt(System.console().readLine());
                     System.out.println("Digite o valor do saque: ");
@@ -151,7 +161,9 @@ public class AgenciaCliente {
 
                     break;
                 } catch (Exception e) {
-                    System.out.println("Erro: " + e.getMessage());
+                    System.out.println("===================================");
+                    System.out.println("Resultado:");
+                    System.out.println("Erro ao realizar saque, favor tente novamente.");
                 }
                 break;
             case 5:
@@ -175,7 +187,9 @@ public class AgenciaCliente {
                     }
                     break;
                 } catch (Exception e) {
-                    System.out.println("Erro: " + e.getMessage());
+                    System.out.println("===================================");
+                    System.out.println("Resultado:");
+                    System.out.println("Erro ao realizar depósito, favor tente novamente.");
                 }
                 break;
             case 6:
