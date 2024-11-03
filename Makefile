@@ -4,15 +4,21 @@ all:
 run-server: all
 	java admServidor.java
 
-run-agencia: all
+run-agencia:
 	java agenciaCliente.java
 
 	$(MAKE) clean
 
-run-caixa: all
+run-caixa: 
 	java caixaAutoCliente.java $(id)
 
 	$(MAKE) clean
+
+run-concorrencia:
+	java TesteConcorrencia.java
+
+run-falhas:
+	java injecaoFalhas.java
 
 clean:
 	rm -f *.class
