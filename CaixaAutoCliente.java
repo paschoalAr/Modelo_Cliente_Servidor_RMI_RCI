@@ -41,9 +41,14 @@ public class CaixaAutoCliente {
         System.out.println("4 - Sair");
         System.out.println("Digite a opção desejada: ");
 
-        int opcao = Integer.parseInt(System.console().readLine());
+        try {
+            int opcao = Integer.parseInt(System.console().readLine());
+            return opcao;
+        } catch (Exception e) {
+            System.out.println("Opção inválida");
+        }
 
-        return opcao;
+        return -1;
     }
 
     public static boolean escolha(int opcao, int id) {
@@ -58,7 +63,10 @@ public class CaixaAutoCliente {
                     System.out.println("Saldo: " + contas.saldo(id));
 
                 } catch (Exception e) {
-                    System.out.println("Erro: " + e.getMessage());
+                    System.out.println("===================================");
+                    System.out.println("Resultado:");
+                    System.out.println("Erro ao consultar o saque, favor tente novamente");
+                    return true;
                 }
                 break;
             case 2:
@@ -81,7 +89,10 @@ public class CaixaAutoCliente {
                     }
                     break;
                 } catch (Exception e) {
-                    System.out.println("Erro: " + e.getMessage());
+                    System.out.println("===================================");
+                    System.out.println("Resultado:");
+                    System.out.println("Erro ao sacar, favor tentar novamente");
+                    return true;
                 }
             case 3:
                 try {
@@ -104,7 +115,10 @@ public class CaixaAutoCliente {
                     }
                     break;
                 } catch (Exception e) {
-                    System.out.println("Erro: " + e.getMessage());
+                    System.out.println("===================================");
+                    System.out.println("Resultado:");
+                    System.out.println("Erro ao depositar, favor tentar novamente");
+                    return true;
                 }
             case 4:
                 System.out.println("Saindo...");
