@@ -27,6 +27,8 @@ public class CaixaAutoCliente {
             int quantidadeContas = contas.quantidadeContas();
 
             if (id > quantidadeContas) {
+                System.out.println("===================================");
+                System.out.println("Resultado:");
                 System.out.println("Conta não encontrada");
                 return;
             }
@@ -68,7 +70,10 @@ public class CaixaAutoCliente {
                     System.out.println("Saldo: " + contas.saldo(id));
 
                 } catch (Exception e) {
-                    System.out.println("Erro: " + e.getMessage());
+                    System.out.println("===================================");
+                    System.out.println("Resultado:");
+                    System.out.println("Erro ao consultar o saque, favor tente novamente");
+                    return true;
                 }
                 break;
             case 2:
@@ -90,7 +95,10 @@ public class CaixaAutoCliente {
                     }
                     break;
                 } catch (Exception e) {
-                    System.out.println("Erro: " + e.getMessage());
+                    System.out.println("===================================");
+                    System.out.println("Resultado:");
+                    System.out.println("Erro ao sacar, favor tentar novamente");
+                    return true;
                 }
             case 3:
                 try {
@@ -112,7 +120,10 @@ public class CaixaAutoCliente {
                     }
                     break;
                 } catch (Exception e) {
-                    System.out.println("Erro: " + e.getMessage());
+                    System.out.println("===================================");
+                    System.out.println("Resultado:");
+                    System.out.println("Erro ao depositar, favor tentar novamente");
+                    return true;
                 }
             case 4:
                 System.out.println("Saindo...");
