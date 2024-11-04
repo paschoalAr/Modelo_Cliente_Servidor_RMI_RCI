@@ -65,6 +65,17 @@ public class InjecaoFalhas {
             System.out.println("\n===================================");
             System.out.println("Saldo após primeiro saques da conta " + contaId + ": " + contas.saldo(contaId));
 
+            System.out.println("\n===================================");
+            System.out.println("Criação de conta");
+            UUID requestIdCriacao = UUID.randomUUID();
+            boolean resultadoCriacao = contas.criaConta("Teste" ,1000.0, requestIdCriacao);
+            System.out.println("Criação de conta realizada: " + resultadoCriacao);
+
+            System.out.println("\n===================================");
+            System.out.println("Criando uma nova conta com o mesmo ID");
+            boolean resultadoCriacao2 = contas.criaConta("Teste" ,1000.0, requestIdCriacao);
+            System.out.println("Criação de conta realizada: " + resultadoCriacao2);
+
         } catch (Exception e) {
             System.out.println("Erro no teste: " + e.getMessage());
         }
