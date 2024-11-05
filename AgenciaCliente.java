@@ -1,4 +1,5 @@
 import java.rmi.Naming;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -70,7 +71,22 @@ public class AgenciaCliente {
 
                     UUID requestId = UUID.randomUUID();
 
-                    boolean resultado = contas.criaConta(nome, saldo, requestId);
+                    boolean resultado;
+
+                    while(true) {
+                        System.out.println("Reestabelecendo conexão...");
+                        try {
+                            resultado = contas.criaConta(nome, saldo, requestId);
+                        } catch(RemoteException e) {
+                            try {
+                                contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
+                            } catch(Exception ee) {
+                                continue;
+                            }
+                            continue;
+                        }
+                        break;
+                    }
 
                     System.out.println("===================================");
                     System.out.println("Resultado:");
@@ -139,7 +155,22 @@ public class AgenciaCliente {
                     double valor = Double.parseDouble(System.console().readLine());
 
                     UUID requestId = UUID.randomUUID();
-                    boolean retorno = contas.saque(id, valor, requestId);
+                    boolean retorno;
+
+                    while(true) {
+                        System.out.println("Reestabelecendo conexão...");
+                        try {
+                            retorno = contas.saque(id, valor, requestId);
+                        } catch(RemoteException e) {
+                            try {
+                                contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
+                            } catch(Exception ee) {
+                                continue;
+                            }
+                            continue;
+                        }
+                        break;
+                    }
 
                     System.out.println("===================================");
                     System.out.println("Resultado:");
@@ -167,7 +198,22 @@ public class AgenciaCliente {
                     double valor = Double.parseDouble(System.console().readLine());
                     
                     UUID requestId = UUID.randomUUID();
-                    boolean retorno = contas.deposito(id, valor, requestId);
+                    boolean retorno;
+
+                    while(true) {
+                        System.out.println("Reestabelecendo conexão...");
+                        try {
+                            retorno = contas.deposito(id, valor, requestId);
+                        } catch(RemoteException e) {
+                            try {
+                                contas = (ContasInterface) Naming.lookup("rmi://localhost/Contas");
+                            } catch(Exception ee) {
+                                continue;
+                            }
+                            continue;
+                        }
+                        break;
+                    }
                     
                     System.out.println("===================================");
                     System.out.println("Resultado:");

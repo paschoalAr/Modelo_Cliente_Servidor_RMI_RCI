@@ -5,12 +5,12 @@ run-server: all
 	java admServidor.java
 
 run-agencia:
-	java agenciaCliente.java
+	java AgenciaCliente.java
 
 	$(MAKE) clean
 
 run-caixa: 
-	java caixaAutoCliente.java $(id)
+	java CaixaAutoCliente.java $(id)
 
 	$(MAKE) clean
 
@@ -18,7 +18,7 @@ run-concorrencia:
 	java TesteConcorrencia.java
 
 run-falhas:
-	java injecaoFalhas.java
+	java InjecaoFalhas.java
 
 clean:
 	rm -f *.class
